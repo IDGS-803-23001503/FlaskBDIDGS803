@@ -1,0 +1,13 @@
+// iria en env, static y nodemodelos 
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+./.env/
+./static/
+./node_modules/
