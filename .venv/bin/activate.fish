@@ -33,11 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-<<<<<<< HEAD:.env/bin/activate.fish
-set -gx VIRTUAL_ENV /home/uriel-zavala/Documentos/Universidad/FlaskBDIDGS803/.env
-=======
 set -gx VIRTUAL_ENV /home/uriel-zavala/Documentos/universidad/FlaskBDIDGS803/.venv
->>>>>>> 6cf3a5e (26/02/26 abc completo):.venv/bin/activate.fish
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/"bin $PATH

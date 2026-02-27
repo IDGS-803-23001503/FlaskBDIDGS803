@@ -2,26 +2,14 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask import flash
 from flask_wtf.csrf import CSRFProtect
 from config import DevelopmentConfig
-<<<<<<< HEAD
 from flask import g
-=======
-from flask import g 
-
-from flask_migrate import Migrate
-
->>>>>>> 5b2df55 (26/02/26 abc completo)
 import forms
-from models import db, Alumno
+from models import db, Alumnos
 
 app = Flask(__name__)			
 
 app.config.from_object(DevelopmentConfig)
-<<<<<<< HEAD
 csrf=CSRFProtect(app)
-=======
-csrf=CSRFProtect()
-migrate = Migrate(app, db)
->>>>>>> 5b2df55 (26/02/26 abc completo)
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -41,6 +29,8 @@ def alumnos():
     if request.method=='POST':
         alum = Alumnos(nombre=create_form.nombre.data,
                        apaterno=create_form.apaterno.data,
+                       amaterno=create_form.amaterno.data,
+                       telefono=create_form.telefono.data,
                        email=create_form.email.data)
         db.session.add(alum)
         db.session.commit()
@@ -75,12 +65,12 @@ def detalles():
         correo=correo
     )
 
-@app.route("/modificar",method=['GET','POST'])
+@app.route("/modificar",methods=['GET','POST'])
 def modificar():
-		create_form=form.UserForm(request.form)
+		create_form=forms.UserForm(request.form)
 		if request.method=='GET':
 			id=request.args.get('id')
-			alum1=db.session.query(Alumnos).filter(Alumnos)
+			alum1=db.session.query(Alumnos).filter(Alumnos.id == id).first()
 			create_form=forms.UserForm(obj=alum1)
 			create_form.id.data=id
 			create_form.nombre.data=alum1.nombre
@@ -93,25 +83,27 @@ def modificar():
 				alum1.nombre=create_form.nombre.data
 				alum1.apaterno=create_form.apaterno.data
 				alum1.amaterno=create_form.amaterno.data
+				alum1.telefono=create_form.telefono.data
 				alum1.email=create_form.email.data
 				db.session.add(alum1)
 				db.session.commit()
 				return redirect(url_for('index'))
 			return render_template("modificar.html",form=create_form)
 			
-@app.route("/eliminar",method=['GET','POST'])
+@app.route("/eliminar",methods=['GET','POST'])
 def eliminar():
-		create_form=form.UserForm(request.form)
+		create_form=forms.UserForm(request.form)
 		if request.method=='GET':
 			id=request.args.get('id')
-			alum1=db.session.query(Alumnos).filter(Alumnos)
+			alum1=db.session.query(Alumnos).filter(Alumnos.id == id).first()
 			create_form=forms.UserForm(obj=alum1)
 			create_form.id.data=id
 			create_form.nombre.data=alum1.nombre
 			create_form.apaterno.data=alum1.apaterno
 			create_form.amaterno.data=alum1.amaterno
+			create_form.telefono.data=alum1.telefono
 			create_form.email.data=alum1.email
-			if request.method=='DELETE':
+			if request.method=='POST':
 				id=create_form.id.data
 				alum1=db.session.query(Alumnos).filter(Alumnos.id == id).first()
 				db.session.delete(alum1)

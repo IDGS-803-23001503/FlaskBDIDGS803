@@ -1,8 +1,4 @@
-<<<<<<< HEAD:.env/bin/flask
-#!/home/uriel-zavala/Documentos/Universidad/FlaskBDIDGS803/.env/bin/python3
-=======
 #!/home/uriel-zavala/Documentos/universidad/FlaskBDIDGS803/.venv/bin/python3
->>>>>>> 6cf3a5e (26/02/26 abc completo):.venv/bin/flask
 # -*- coding: utf-8 -*-
 import re
 import sys

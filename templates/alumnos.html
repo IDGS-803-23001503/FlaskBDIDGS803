@@ -1,27 +1,51 @@
-
-<!-- # referenciado con layaout.html -->
-
 {% extends "layout.html" %}
-
-
-
 {% block container %}
 {% import "_macros.html" as macros %}
-<form class="max-w-sm mx-auto">
+
+<div class="mb-4 px-4 py-3 bg-neutral-primary-soft rounded-base border border-default">
+  <h1 class="text-2xl font-bold text-heading mb-2">Registrar Nuevo Alumno</h1>
+  <p class="text-body mb-4">Ingresa la información requerida.</p>
+</div>
+
+<form action="/Alumnos" method="POST" novalidate class="max-w-sm mx-auto mt-6">
+  {{ form.csrf_token }}
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
   <div class="mb-5">
-    <label for="email" class="block mb-2.5 text-sm font-medium text-heading">Your email</label>
-    <input type="email" id="email" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="name@flowbite.com" required />
+    {{ macros.campoNuevo(form.nombre, class="bg-neutral-secondary-medium border border-default-medium text-heading
+    text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body")
+    }}
   </div>
+
   <div class="mb-5">
-    <label for="password" class="block mb-2.5 text-sm font-medium text-heading">Your password</label>
-    <input type="password" id="password" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" placeholder="••••••••" required />
+    {{ macros.campoNuevo(form.apaterno, class="bg-neutral-secondary-medium border border-default-medium text-heading
+    text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body")
+    }}
   </div>
-  <label for="remember" class="flex items-center mb-5">
-    <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-default-medium rounded-xs bg-neutral-secondary-medium focus:ring-2 focus:ring-brand-soft" required />
-    <p class="ms-2 text-sm font-medium text-heading select-none">I agree with the <a href="#" class="text-fg-brand hover:underline">terms and conditions</a>.</p>
-  </label>
-  <button type="submit" class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Submit</button>
+
+  <div class="mb-5">
+    {{ macros.campoNuevo(form.amaterno, class="bg-neutral-secondary-medium border border-default-medium text-heading
+    text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body")
+    }}
+  </div>
+
+  <div class="mb-5">
+    {{ macros.campoNuevo(form.telefono, class="bg-neutral-secondary-medium border border-default-medium text-heading
+    text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body")
+    }}
+  </div>
+
+  <div class="mb-5">
+    {{ macros.campoNuevo(form.email, class="bg-neutral-secondary-medium border border-default-medium text-heading
+    text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body")
+    }}
+  </div>
+
+  <button type="submit"
+    class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+    Registrar
+  </button>
+  <a href="/" class="ml-4 font-medium text-fg-brand hover:underline">Regresar</a>
 </form>
-{% endblock %} 
 
-
+{% endblock %}
