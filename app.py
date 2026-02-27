@@ -2,14 +2,26 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask import flash
 from flask_wtf.csrf import CSRFProtect
 from config import DevelopmentConfig
+<<<<<<< HEAD
 from flask import g
+=======
+from flask import g 
+
+from flask_migrate import Migrate
+
+>>>>>>> 5b2df55 (26/02/26 abc completo)
 import forms
 from models import db, Alumno
 
 app = Flask(__name__)			
 
 app.config.from_object(DevelopmentConfig)
+<<<<<<< HEAD
 csrf=CSRFProtect(app)
+=======
+csrf=CSRFProtect()
+migrate = Migrate(app, db)
+>>>>>>> 5b2df55 (26/02/26 abc completo)
 
 @app.errorhandler(404)
 def page_not_found(e):
