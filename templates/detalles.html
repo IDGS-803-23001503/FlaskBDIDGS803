@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block container %}
+
+<div class="mb-4 px-4 py-3 bg-neutral-primary-soft rounded-base border border-default">
+  <h1 class="text-2xl font-bold text-heading mb-2">Detalles del Alumno</h1>
+  <p class="text-body mb-4">Información detallada sobre este alumno.</p>
+</div>
+
+<div class="max-w-sm mx-auto mt-6 bg-neutral-primary shadow-xs rounded-lg border border-default p-5">
+    
+    <div class="mb-5">
+        <label class="block mb-2 text-sm font-medium text-heading">Nombre</label>
+        <div class="bg-neutral-secondary border border-default-medium text-heading text-sm rounded-base block w-full px-3 py-2.5 shadow-xs">
+            {{ nombre }}
+        </div>
+    </div>
+
+    <div class="mb-5">
+        <label class="block mb-2 text-sm font-medium text-heading">Apellido Paterno</label>
+        <div class="bg-neutral-secondary border border-default-medium text-heading text-sm rounded-base block w-full px-3 py-2.5 shadow-xs">
+            {{ apaterno }}
+        </div>
+    </div>
+
+    <div class="mb-5">
+        <label class="block mb-2 text-sm font-medium text-heading">Apellido Materno</label>
+        <div class="bg-neutral-secondary border border-default-medium text-heading text-sm rounded-base block w-full px-3 py-2.5 shadow-xs">
+            {{ amaterno }}
+        </div>
+    </div>
+
+    <div class="mb-5">
+        <label class="block mb-2 text-sm font-medium text-heading">Correo Electrónico</label>
+        <div class="bg-neutral-secondary border border-default-medium text-heading text-sm rounded-base block w-full px-3 py-2.5 shadow-xs">
+            {{ correo }}
+        </div>
+    </div>
+
+    <a href="/" class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+        Regresar
+    </a>
+</div>
+
+{% endblock %}
