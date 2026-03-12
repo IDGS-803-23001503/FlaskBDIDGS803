@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block container %}
+<section class="w-full max-w-4xl mx-auto mt-16 text-center px-4">
+  <p class="uppercase tracking-wide text-sm text-fg-brand font-semibold mb-4">Bienvenido</p>
+  <h1 class="text-4xl font-bold text-heading mb-6">Sistema Escolar Flask IDGS</h1>
+  <p class="text-body mb-10">Administra maestros, cursos y alumnos desde un solo lugar. Usa la barra de navegación para ir directamente al módulo que necesitas o consulta las inscripciones en la sección de reportes.</p>
+  <div class="flex flex-wrap justify-center gap-4">
+    <a href="{{ url_for('alumnos.index') }}" class="px-6 py-3 rounded-base bg-brand text-white text-sm font-semibold shadow-xs">Ir a Alumnos</a>
+    <a href="{{ url_for('maestros.index') }}" class="px-6 py-3 rounded-base border border-default text-heading text-sm font-semibold">Ir a Maestros</a>
+    <a href="{{ url_for('cursos.index') }}" class="px-6 py-3 rounded-base border border-default text-heading text-sm font-semibold">Ir a Cursos</a>
+  </div>
+</section>
+{% endblock %}

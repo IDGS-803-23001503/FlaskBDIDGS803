@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% import "_macros.html" as macros %}
+
+{% block container %}
+<div class="mb-4 px-4 py-3 bg-neutral-primary-soft rounded-base border border-default">
+  <h1 class="text-2xl font-bold text-heading mb-2">Registrar Nuevo Maestro</h1>
+  <p class="text-body mb-4">Ingresa la información requerida.</p>
+</div>
+
+<form action="{{ url_for('maestros.crear') }}" method="POST" novalidate class="max-w-sm mx-auto mt-6">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
+  <div class="mb-5">
+    {{ macros.campoNuevo(form.matricula, class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body") }}
+  </div>
+
+  <div class="mb-5">
+    {{ macros.campoNuevo(form.nombre, class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body") }}
+  </div>
+
+  <div class="mb-5">
+    {{ macros.campoNuevo(form.apellidos, class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body") }}
+  </div>
+
+  <div class="mb-5">
+    {{ macros.campoNuevo(form.especialidad, class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body") }}
+  </div>
+
+  <div class="mb-5">
+    {{ macros.campoNuevo(form.email, class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body") }}
+  </div>
+
+  <button type="submit"
+    class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+    Registrar
+  </button>
+  <a href="{{ url_for('maestros.index') }}" class="ml-4 font-medium text-fg-brand hover:underline">Regresar</a>
+</form>
+{% endblock %}

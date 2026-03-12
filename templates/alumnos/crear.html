@@ -7,7 +7,7 @@
   <p class="text-body mb-4">Ingresa la información requerida.</p>
 </div>
 
-<form action="/Alumnos" method="POST" novalidate class="max-w-sm mx-auto mt-6">
+<form action="{{ url_for('alumnos.crear') }}" method="POST" novalidate class="max-w-sm mx-auto mt-6">
   {{ form.csrf_token }}
   <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 
@@ -45,7 +45,7 @@
     class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
     Registrar
   </button>
-  <a href="/" class="ml-4 font-medium text-fg-brand hover:underline">Regresar</a>
+  <a href="{{ url_for('alumnos.index') }}" class="ml-4 font-medium text-fg-brand hover:underline">Regresar</a>
 </form>
 
 {% endblock %}

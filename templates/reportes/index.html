@@ -1,0 +1,110 @@
+{% extends "layout.html" %}
+{% block container %}
+<div class="flex flex-col gap-8 w-full max-w-6xl mx-auto mt-10 px-4">
+  <div class="px-4 py-3 bg-neutral-primary-soft rounded-base border border-default">
+    <h1 class="text-2xl font-bold text-heading mb-2">Reportes</h1>
+    <p class="text-body mb-0">Consulta qué alumnos pertenecen a un curso y a qué cursos está inscrito un alumno.</p>
+  </div>
+
+  <div class="grid gap-8 md:grid-cols-2">
+    <section class="bg-neutral-primary-soft border border-default rounded-lg p-6">
+      <h2 class="text-lg font-semibold text-heading mb-4">Alumnos por curso</h2>
+      <form method="POST" class="space-y-4">
+        {{ curso_form.csrf_token }}
+        <input type="hidden" name="action" value="curso" />
+        <label class="block text-sm font-medium text-heading">Curso</label>
+        <select name="{{ curso_form.curso_id.name }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs">
+          {% for value, label in curso_form.curso_id.choices %}
+          <option value="{{ value }}" {% if curso_form.curso_id.data == value|int %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+        {% if curso_form.curso_id.errors %}
+        <p class="text-sm text-red-600">{{ curso_form.curso_id.errors[0] }}</p>
+        {% endif %}
+        <button type="submit" class="text-white bg-brand border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Consultar</button>
+      </form>
+      {% if selected_curso %}
+      <div class="mt-6">
+        <p class="text-sm text-body mb-2">Total alumnos: {{ curso_alumnos|length }}</p>
+        <ul class="divide-y divide-default">
+          {% for alumno in curso_alumnos %}
+          <li class="py-2">
+            <span class="font-medium text-heading">{{ alumno.nombre }} {{ alumno.apaterno }}</span>
+            <p class="text-sm text-body">{{ alumno.email }}</p>
+          </li>
+          {% else %}
+          <li class="py-4 text-sm text-body">No hay alumnos registrados en este curso.</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </section>
+
+    <section class="bg-neutral-primary-soft border border-default rounded-lg p-6">
+      <h2 class="text-lg font-semibold text-heading mb-4">Cursos por alumno</h2>
+      <form method="POST" class="space-y-4">
+        {{ alumno_form.csrf_token }}
+        <input type="hidden" name="action" value="alumno" />
+        <label class="block text-sm font-medium text-heading">Alumno</label>
+        <select name="{{ alumno_form.alumno_id.name }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs">
+          {% for value, label in alumno_form.alumno_id.choices %}
+          <option value="{{ value }}" {% if alumno_form.alumno_id.data == value|int %}selected{% endif %}>{{ label }}</option>
+          {% endfor %}
+        </select>
+        {% if alumno_form.alumno_id.errors %}
+        <p class="text-sm text-red-600">{{ alumno_form.alumno_id.errors[0] }}</p>
+        {% endif %}
+        <button type="submit" class="text-white bg-brand border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Consultar</button>
+      </form>
+      {% if selected_alumno %}
+      <div class="mt-6">
+        <p class="text-sm text-body mb-2">Total cursos: {{ alumno_cursos|length }}</p>
+        <ul class="divide-y divide-default">
+          {% for curso in alumno_cursos %}
+          <li class="py-2">
+            <span class="font-medium text-heading">{{ curso.nombre }}</span>
+            <p class="text-sm text-body">Imparte: {{ curso.maestro.nombre }}</p>
+          </li>
+          {% else %}
+          <li class="py-4 text-sm text-body">El alumno aún no tiene cursos asignados.</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </section>
+  </div>
+
+  <section class="bg-neutral-primary-soft border border-default rounded-lg p-6">
+    <h2 class="text-lg font-semibold text-heading mb-4">Inscribir alumno a curso</h2>
+    <form method="POST" class="grid gap-4 md:grid-cols-3">
+      {{ inscribir_form.csrf_token }}
+      <input type="hidden" name="action" value="inscribir" />
+      <div class="md:col-span-1">
+        <label class="block text-sm font-medium text-heading">Alumno</label>
+        <select name="{{ inscribir_form.alumno_id.name }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs">
+          {% for value, label in inscribir_form.alumno_id.choices %}
+          <option value="{{ value }}">{{ label }}</option>
+          {% endfor %}
+        </select>
+        {% if inscribir_form.alumno_id.errors %}
+        <p class="text-sm text-red-600">{{ inscribir_form.alumno_id.errors[0] }}</p>
+        {% endif %}
+      </div>
+      <div class="md:col-span-1">
+        <label class="block text-sm font-medium text-heading">Curso</label>
+        <select name="{{ inscribir_form.curso_id.name }}" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs">
+          {% for value, label in inscribir_form.curso_id.choices %}
+          <option value="{{ value }}">{{ label }}</option>
+          {% endfor %}
+        </select>
+        {% if inscribir_form.curso_id.errors %}
+        <p class="text-sm text-red-600">{{ inscribir_form.curso_id.errors[0] }}</p>
+        {% endif %}
+      </div>
+      <div class="flex items-end">
+        <button type="submit" class="text-white bg-brand border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none w-full">Inscribir</button>
+      </div>
+    </form>
+  </section>
+</div>
+{% endblock %}

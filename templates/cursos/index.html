@@ -4,14 +4,14 @@
 <div class="flex flex-col w-full max-w-7xl mx-auto px-4 gap-4 mt-8">
 
   <div class="px-4 py-3 bg-neutral-primary-soft rounded-base border border-default">
-    <h1 class="text-2xl font-bold text-heading mb-2">Alumnos</h1>
-    <p class="text-body mb-0">Aquí puedes encontrar la lista de alumnos registrados en el sistema.</p>
+    <h1 class="text-2xl font-bold text-heading mb-2">Cursos</h1>
+    <p class="text-body mb-0">Aquí puedes encontrar la lista de cursos registrados en el sistema.</p>
   </div>
 
   <div class="flex justify-end mb-4">
-    <a href="/Alumnos"
+    <a href="{{ url_for('cursos.crear') }}"
       class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
-      Registrar Nuevo Alumno
+      Registrar Nuevo Curso 
     </a>
   </div>
 
@@ -24,16 +24,10 @@
             Nombre
           </th>
           <th scope="col" class="px-6 py-3 font-medium">
-            APaterno
+            Descripcion
           </th>
           <th scope="col" class="px-6 py-3 font-medium">
-            AMaterno
-          </th>
-          <th scope="col" class="px-6 py-3 font-medium">
-            Telefono
-          </th>
-          <th scope="col" class="px-6 py-3 font-medium">
-            Correo
+            Maestro ID
           </th>
           <th scope="col" class="px-6 py-3 font-medium">
             Editar
@@ -47,32 +41,26 @@
         </tr>
       </thead>
       <tbody>
-        {% for a in alumno %}
+        {% for a in cursos %}
         <tr class="bg-neutral-primary border-b border-default">
           <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
             {{ a.nombre }}
           </th>
           <td class="px-6 py-4">
-            {{ a.apaterno }}
+            {{ a.descripcion }}
           </td>
           <td class="px-6 py-4">
-            {{ a.amaterno }}
+            {{ a.maestro_id }}
           </td>
           <td class="px-6 py-4">
-            {{ a.telefono }}
+            <a href="{{ url_for('cursos.modificar', id=a.id) }}" class="font-medium text-fg-brand hover:underline">Editar</a>
           </td>
           <td class="px-6 py-4">
-            {{ a.email }}
+            <a href="{{ url_for('cursos.detalles', id=a.id) }}" class="font-medium text-fg-brand hover:underline">Detalles</a>
           </td>
-          <th scope="col" class="px-6 py-3 font-medium">
-            <a href="/modificar?id={{ a.id }}" class="font-medium text-fg-brand hover:underline">Editar</a>
-          </th>
-          <th scope="col" class="px-6 py-3 font-medium">
-            <a href="/detalles?id={{ a.id }}" class="font-medium text-fg-brand hover:underline">Detalles</a>
-          </th>
-          <th scope="col" class="px-6 py-3 font-medium">
-            <a href="/eliminar?id={{ a.id }}" class="font-medium text-fg-brand hover:underline">Eliminar</a>
-          </th>
+          <td class="px-6 py-4">
+            <a href="{{ url_for('cursos.eliminar', id=a.id) }}" class="font-medium text-fg-brand hover:underline">Eliminar</a>
+          </td>
         </tr>
         {% endfor %}
       </tbody>

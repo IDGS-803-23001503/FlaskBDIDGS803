@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+
+{% block container %}
+<div class="flex flex-col w-full max-w-7xl mx-auto px-4 gap-4 mt-8">
+
+  <div class="px-4 py-3 bg-neutral-primary-soft rounded-base border border-default">
+    <h1 class="text-2xl font-bold text-heading mb-2">Maestros</h1>
+    <p class="text-body mb-0">Aquí puedes encontrar la lista de maestros registrados en el sistema.</p>
+  </div>
+
+  <div class="flex justify-end mb-4">
+    <a href="{{ url_for('maestros.crear') }}"
+      class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+      Registrar Nuevo Maestro
+    </a>
+  </div>
+
+
+  <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-lg border border-default">
+    <table class="w-full text-sm text-left rtl:text-right text-body">
+      <thead class="text-sm text-body bg-neutral-secondary-soft border-b rounded-base border-default">
+        <tr>
+          <th scope="col" class="px-6 py-3 font-medium">
+            Nombre
+          </th>
+          <th scope="col" class="px-6 py-3 font-medium">
+            Apellidos
+          </th>
+          <th scope="col" class="px-6 py-3 font-medium">
+            Especialidad
+          </th>
+          <th scope="col" class="px-6 py-3 font-medium">
+            Matrícula
+          </th>
+          <th scope="col" class="px-6 py-3 font-medium">
+            Correo
+          </th>
+          
+          <th scope="col" class="px-6 py-3 font-medium">
+            Detalles
+          </th>
+          <th scope="col" class="px-6 py-3 font-medium">
+            Modificar
+          </th>
+          <th scope="col" class="px-6 py-3 font-medium">
+            Eliminar
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for m in maestros %}
+        <tr class="bg-neutral-primary border-b border-default">
+          <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
+            {{ m.nombre }}
+          </th>
+          <td class="px-6 py-4">
+            {{ m.apellidos }}
+          </td>
+          <td class="px-6 py-4">
+            {{ m.especialidad }}
+          </td>
+          <td class="px-6 py-4">
+            {{ m.matricula }}
+          </td>
+          <td class="px-6 py-4">
+            {{ m.email }}
+          </td>
+        
+          <th scope="col" class="px-6 py-3 font-medium">
+            <a href="{{ url_for('maestros.detalles', matricula=m.matricula) }}" class="font-medium text-fg-brand hover:underline">Detalles</a>
+          </th>
+          <th scope="col" class="px-6 py-3 font-medium">
+            <a href="{{ url_for('maestros.modificar', matricula=m.matricula) }}" class="font-medium text-fg-brand hover:underline">Modificar</a>
+          </th>
+          <th scope="col" class="px-6 py-3 font-medium">
+            <a href="{{ url_for('maestros.eliminar', matricula=m.matricula) }}" class="font-medium text-fg-brand hover:underline">Eliminar</a>
+          </th>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

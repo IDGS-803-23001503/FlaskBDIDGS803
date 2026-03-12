@@ -1,0 +1,37 @@
+{% extends "layout.html" %} {% block container %} {% import "_macros.html" as macros %}
+
+<form method="POST" novalidate class="max-w-sm mx-auto">
+  {{ form.csrf_token }}
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+  <div class="mb-5">
+    {{ macros.campoNuevo(form.nombre, class="bg-neutral-secondary-medium
+    border border-default-medium text-heading text-sm rounded-base
+    focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs
+    placeholder:text-body") }}
+  </div>
+  <div class="mb-5">
+    {{ macros.campoNuevo(form.descripcion, class="bg-neutral-secondary-medium
+    border border-default-medium text-heading text-sm rounded-base
+    focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs
+    placeholder:text-body") }}
+  </div>
+  <div class="mb-5">
+    <label for="maestro_id" class="block mb-2 text-sm font-medium text-heading">Maestro</label>
+    <select id="maestro_id" name="maestro_id" class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs" required>
+      {% for maestro in maestros %}
+      <option value="{{ maestro.matricula }}" {% if form.maestro_id.data == maestro.matricula %}selected{% endif %}>
+        {{ maestro.nombre }} {{ maestro.apellidos }} ({{ maestro.matricula }})
+      </option>
+      {% endfor %}
+    </select>
+    {% if form.maestro_id.errors %}
+      <p class="text-sm text-red-600 mt-2">{{ form.maestro_id.errors[0] }}</p>
+    {% endif %}
+  </div>
+  <button type="submit"
+    class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+    Guardar Cambios
+  </button>
+  <a href="{{ url_for('cursos.index') }}" class="ml-4 font-medium text-fg-brand hover:underline">Cancelar</a>
+</form>
+{% endblock %}
